@@ -9,7 +9,7 @@ function Sunset({ timeLeft }: SunsetProps) {
     const maxTimeDiff = 1000 * 60 * 60 * 24; // Max millis in 24 hours
     // maybe start the moving of the sun with a couple of hours left only
 
-    const sun = useRef(null);
+    let sun = useRef<HTMLDivElement>(null);
     useEffect(() => {
         if (sun !== null && sun.current !== null) {
             sun.current.style.top = `calc(50vh - (50vh * ${timeLeft/maxTimeDiff}))`;
