@@ -1,0 +1,39 @@
+.sunset {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    float: none;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.heaven {
+    background-color: skyblue;
+    position: absolute;
+    top: 0;
+    height: 50vh;
+    width: 100vw;
+    z-index: -2;
+}
+
+.ocean {
+    background-color: aquamarine;
+    position: absolute;
+    bottom: 0;
+    height: 50vh;
+    width: 100vw;
+    z-index: -2;
+}
+
+.sun {
+    background-color: yellow;
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    width: 10vmax;
+    height: 10vmax;
+}
