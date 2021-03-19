@@ -25,6 +25,19 @@ export interface WeatherProps {
 
 function Weather({ weatherData }: WeatherProps) {
     const [currentTime, setCurrentTime] = useState(0);
+    const [sunsetDate, setSunsetDate] = useState(new Date(weatherData.sys.sunset * 1000))
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        setSunsetDate(new Date(weatherData.sys.sunset * 1000));
+    }, [weatherData])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [])
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -42,6 +55,22 @@ function Weather({ weatherData }: WeatherProps) {
         return time;
     }
 
+    const getTimeDiffString = (date1: Date, date2: Date) => {
+        let msec = new Date(date1.getTime() - date2.getTime()).getTime();
+        if (msec > 0) {
+            const hh = Math.floor(msec / 1000 / 60 / 60);
+            msec -= hh * 1000 * 60 * 60;
+            const mm = Math.floor(msec / 1000 / 60);
+            msec -= mm * 1000 * 60;
+            const ss = Math.floor(msec / 1000);
+            msec -= ss * 1000;
+
+            return `${hh} ${hh === 1 ? "hour" : "hours"}, ${mm} ${mm === 1 ? "minute" : "minutes"}, ${ss} ${ss === 1 ? "second": "seconds"}`;
+        } else {
+            return "The sun has set";
+        }
+    };
+
     const getTimeDifference = (time1: number, time2: number) => {
         return new Date(Math.abs(time1 - time2));
     }
@@ -54,13 +83,14 @@ function Weather({ weatherData }: WeatherProps) {
     return (
         <section className={"weather"}>
             <div className={"title"}>{weatherData.name}</div>
-            <div className={"card time-sunset"}>🌆 {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</div>
-            <div className={"card time-left"}>⌛️ {getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).toLocaleTimeString()}</div>
+            <div className={"card time-sunset"}>Sunset is at {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</div>
+            {/* <div className={"card time-left"}>⌛️ {getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).toLocaleTimeString()}</div> */}
+            <div className={"card time-left"}>⌛️ {getTimeDiffString(sunsetDate, currentDate)} left</div>
             {/* <h2>Sunrise is: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</h2> */}
             {/* <h2>Time until sunrise: {getTimeDifference(weatherData.sys.sunrise * 1000, getCurrentTime()).toLocaleTimeString()}</h2> */}
             {/* <h2>Current time is: {new Date(currentTime).toLocaleTimeString()}</h2> */}
             {/* <h2>Is it time for sunset? {isItTimeForSunset() ? "Yes" : "No"}</h2> */}
-            <Sunset timeLeft={getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).getTime()}/>
+            <Sunset timeLeft={(weatherData.sys.sunset * 1000) - currentDate.getTime()}/>
         </section>
     );
 }
