@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./weather.css";
 import Sunset from "./sunset";
-import dayjs from "dayjs";
 
 export interface WeatherData {
     name?: string
