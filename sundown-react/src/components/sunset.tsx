@@ -11,7 +11,7 @@ function Sunset({ timeLeft }: SunsetProps) {
     let sun = useRef<HTMLDivElement>(null);
     useEffect(() => {
         if (sun !== null && sun.current !== null && timeLeft < startMovingTime) {
-            // sun.current.style.top = `calc(50vh - (45vh * ${timeLeft/startMovingTime}))`;
+            sun.current.style.top = `calc(50vh - (45vh * ${timeLeft/startMovingTime}))`;
         }
     }, [timeLeft])
 
