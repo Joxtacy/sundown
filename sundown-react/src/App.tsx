@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import Weather, { WeatherData } from "./components/weather";
 import axios from 'axios';
+import ErrorBoundary from './components/error-boundary';
 
 function App() {
     const [lat, setLat] = useState(0);
@@ -69,13 +70,15 @@ function App() {
             return (<div>I promise, I will not abuse your permission. 🦹‍♂️</div>)
         }
     }
-  return (
-    <div className="App">
-        {(typeof data.main != 'undefined') ? (
-            <Weather weatherData={data}/>
-        ) : renderDefault() }
-    </div>
-  )
+    return (
+        <ErrorBoundary>
+            <div className="App">
+                {(typeof data.main != 'undefined') ? (
+                    <Weather weatherData={data}/>
+                ) : renderDefault() }
+            </div>
+        </ErrorBoundary>
+    )
 }
 
 export default App
