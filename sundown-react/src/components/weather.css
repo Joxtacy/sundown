@@ -7,11 +7,11 @@
 }
 
 .weather .card {
-    font-size: 2rem;
+    font-size: 4.5vmin;
     margin: 1.5rem;
 }
 
 .weather .title {
-    font-size: 3rem;
+    font-size: 7vmin;
     margin: 2rem;
 }
