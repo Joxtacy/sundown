@@ -64,7 +64,7 @@ function Weather({ weatherData }: WeatherProps) {
             const ss = Math.floor(msec / 1000);
             msec -= ss * 1000;
 
-            return `${hh} ${hh === 1 ? "hour" : "hours"}, ${mm} ${mm === 1 ? "minute" : "minutes"}, ${ss} ${ss === 1 ? "second": "seconds"}`;
+            return `${hh} ${hh === 1 ? "hour" : "hours"}, ${mm} ${mm === 1 ? "minute" : "minutes"}, ${ss} ${ss === 1 ? "second": "seconds"} left`;
         } else {
             return "The sun has set";
         }
@@ -84,7 +84,7 @@ function Weather({ weatherData }: WeatherProps) {
             <div className={"title"}>{weatherData.name}</div>
             <div className={"card time-sunset"}>Sunset is at {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</div>
             {/* <div className={"card time-left"}>⌛️ {getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).toLocaleTimeString()}</div> */}
-            <div className={"card time-left"}>⌛️ {getTimeDiffString(sunsetDate, currentDate)} left</div>
+            <div className={"card time-left"}>⌛️ {getTimeDiffString(sunsetDate, currentDate)}</div>
             {/* <h2>Sunrise is: {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString()}</h2> */}
             {/* <h2>Time until sunrise: {getTimeDifference(weatherData.sys.sunrise * 1000, getCurrentTime()).toLocaleTimeString()}</h2> */}
             {/* <h2>Current time is: {new Date(currentTime).toLocaleTimeString()}</h2> */}
