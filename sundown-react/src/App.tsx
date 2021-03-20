@@ -36,27 +36,32 @@ function App() {
 
     useEffect(() => {
         // ask permission
-        navigator.permissions.query({ name: "geolocation" }).then((result) => {
-            const { state } = result;
-            switch (state) {
-                case "prompt": {
-                    getLocation();
-                    break;
+        if (!navigator.permissions) {
+            // Safari on iOS does not support permissions
+            getLocation();
+        } else {
+            navigator.permissions.query({ name: "geolocation" }).then((result) => {
+                const { state } = result;
+                switch (state) {
+                    case "prompt": {
+                        getLocation();
+                        break;
+                    }
+                    case "granted": {
+                        getLocation();
+                        break;
+                    }
+                    case "denied": {
+                        break;
+                    }
                 }
-                case "granted": {
-                    getLocation();
-                    break;
-                }
-                case "denied": {
-                    break;
-                }
-            }
-            setGeoPermission(state);
-
-            result.onchange = function() {
                 setGeoPermission(state);
-            };
-        });
+
+                result.onchange = function() {
+                    setGeoPermission(state);
+                };
+            });
+        }
     }, [geoPermission]);
 
     useEffect(() => {
