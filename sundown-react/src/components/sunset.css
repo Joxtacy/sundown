@@ -5,35 +5,41 @@
     float: none;
     top: 0;
     left: 0;
-    z-index: -3;
+    z-index: -4;
     display: flex;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
 }
 
 .heaven {
-    background-color: skyblue;
+    /* background-color: skyblue; */
     position: absolute;
     top: 0;
     height: 50vh;
     width: 100vw;
-    z-index: -2;
+    z-index: -3;
+    background-color: #06bcfb;
+    background-image: linear-gradient(180deg, #06bcfb 0%, #4884ee 74%);
 }
 
 .ocean {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     position: absolute;
     bottom: 0;
     height: 50vh;
     width: 100vw;
-    z-index: -2;
+    z-index: -1;
+    background-color: #2a2a72;
+    background-image: linear-gradient(0deg, #2a2a72 0%, #009ffd 74%);
 }
 
 .sun {
     background-color: yellow;
     position: absolute;
-    z-index: -1;
+    z-index: -2;
     border-radius: 50%;
     width: 10vmax;
     height: 10vmax;
+    box-shadow: 0 0 5vh 3vh lightgoldenrodyellow;
+    margin: 1vh;
 }

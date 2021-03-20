@@ -6,13 +6,12 @@ interface SunsetProps {
 }
 
 function Sunset({ timeLeft }: SunsetProps) {
-    const maxTimeDiff = 1000 * 60 * 60 * 24; // Max millis in 24 hours
-    // maybe start the moving of the sun with a couple of hours left only
+    const startMovingTime = 1000 * 60 * 60 * 2;
 
     let sun = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        if (sun !== null && sun.current !== null) {
-            sun.current.style.top = `calc(50vh - (50vh * ${timeLeft/maxTimeDiff}))`;
+        if (sun !== null && sun.current !== null && timeLeft < startMovingTime) {
+            // sun.current.style.top = `calc(50vh - (45vh * ${timeLeft/startMovingTime}))`;
         }
     }, [timeLeft])
 
