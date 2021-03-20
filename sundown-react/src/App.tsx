@@ -17,10 +17,14 @@ function App() {
             enableHighAccuracy: true,
         };
 
-        navigator.geolocation.getCurrentPosition((position) => {
+        const successCallback: PositionCallback = (position) => {
             setLat(position.coords.latitude);
             setLon(position.coords.longitude);
-        }, (error) => console.warn("Something went wrong 🤷‍♂️"), options);
+        };
+
+        const errorCallback: PositionErrorCallback = (error) => console.warn("Something went wrong 🤷‍♂️");
+
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
     };
 
     const fetchData = async () => {
@@ -61,13 +65,28 @@ function App() {
         }
     }, [lat, lon]);
 
+    const renderDeniedPermission = () => {
+        return (<div>Y u no let me have permission?</div>)
+    }
+
+    const renderAskForPermission = () => {
+        return (<div>Can I haz permission?</div>)
+    }
+
+    const renderHasPermission = () => {
+        return (<div>I promise, I will not abuse your permission. 🦹‍♂️</div>)
+    }
+
     const renderDefault = () => {
-        if (geoPermission === "denied") {
-            return (<div>Y u no let me have permission?</div>)
-        } else if (geoPermission === "prompt") {
-            return (<div>Can I haz permission?</div>)
-        } else {
-            return (<div>I promise, I will not abuse your permission. 🦹‍♂️</div>)
+        switch (geoPermission) {
+            case "denied":
+                return renderDeniedPermission();
+            case "prompt":
+                return renderAskForPermission();
+            case "granted":
+                return renderHasPermission();
+            default:
+                throw Error("Weird permission state");
         }
     }
     return (
