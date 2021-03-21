@@ -20,22 +20,24 @@ export interface Temperatures {
 export interface WeatherCardProps {
     weather: Weather[];
     temps: Temperatures;
+    location: string;
 }
 
-function WeatherCard({ weather, temps }: WeatherCardProps) {
+function WeatherCard({ weather, temps, location }: WeatherCardProps) {
     return (
         <div className={"weather-card"}>
+            <span className={"weather-location"}>{location}</span>
             <div className={"weather-container"}>
                 <span className={"weather-description"}>{weather[0].description}</span>
                 <img className={"weather-icon"} src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
-            </div>
-            <div className={"weather-temps"}>
                 <div className={"weather-temps-temp"}>
                     {`Temp: ${temps.temp.toFixed(1)}°C`}
                 </div>
                 <div className={"weather-temps-feelslike"}>
                     {`Feels like: ${temps.feels_like.toFixed(1)}°C`}
                 </div>
+            </div>
+            <div className={"weather-temps"}>
             </div>
         </div>
     );

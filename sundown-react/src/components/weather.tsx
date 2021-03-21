@@ -5,7 +5,7 @@ import WeatherCard, { Temperatures } from "./weather-card";
 import { Weather } from "./weather-card";
 
 export interface WeatherData {
-    name?: string
+    name: string
     sys: {
         sunrise: number
         sunset: number
@@ -77,8 +77,8 @@ function WeatherPanel({ weatherData }: WeatherProps) {
 
     return (
         <section className={"weather"}>
-            <WeatherCard weather={weatherData.weather} temps={weatherData.main}/>
-            <div className={"title"}>{weatherData.name}</div>
+            <WeatherCard location={weatherData.name} weather={weatherData.weather} temps={weatherData.main}/>
+            {/* <div className={"title"}>{weatherData.name}</div> */}
             <div className={"card time-sunset"}>Sunset is at {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</div>
             {/* <div className={"card time-left"}>⌛️ {getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).toLocaleTimeString()}</div> */}
             <div className={"card time-left"}>⌛️ {getTimeDiffString(sunsetDate, currentDate)}</div>
