@@ -6,26 +6,33 @@ import axios from 'axios';
 import ErrorBoundary from './components/error-boundary';
 
 function App() {
+    const [loading, setLoading] = useState(false);
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
-    const [data, setData] = useState<WeatherData>({ main: {
-        feels_like: 0,
-        humidity: 0,
-        pressure: 0,
-        temp: 0,
-        temp_min: 0,
-        temp_max: 0
-    },
-    sys: { sunrise: 0, sunset: 0 },
-    weather: [
-        {
-            description: "",
-            id: 0,
-            icon: "",
-            main: ""
-        }
-    ] });
     const [geoPermission, setGeoPermission] = useState("prompt");
+    const [data, setData] = useState<WeatherData>({
+        name: "",
+        main: {
+            feels_like: 0,
+            humidity: 0,
+            pressure: 0,
+            temp: 0,
+            temp_min: 0,
+            temp_max: 0
+        },
+        sys: {
+            sunrise: 0,
+            sunset: 0
+        },
+        weather: [
+            {
+                description: "",
+                id: 0,
+                icon: "",
+                main: ""
+            }
+        ]
+    });
 
     const getLocation = () => {
         const options = {
@@ -44,9 +51,11 @@ function App() {
     };
 
     const fetchData = async () => {
+        setLoading(true);
         const url = `${import.meta.env.VITE_APP_URL}/weather/?lat=${lat}&lon=${lon}&units=metric&APPID=${import.meta.env.VITE_APP_API_KEY}`;
         const result = await axios.get(url);
         setData(result.data);
+        setLoading(false);
         console.log("result", result.data);
     };
 
@@ -110,6 +119,11 @@ function App() {
                 throw Error("Weird permission state");
         }
     }
+
+    const renderLoading = () => {
+        return (<div>Loading...</div>);
+    };
+
     return (
         <ErrorBoundary>
             <div className="App">
