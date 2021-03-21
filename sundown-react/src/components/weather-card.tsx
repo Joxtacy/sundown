@@ -29,7 +29,7 @@ function WeatherCard({ weather, temps, location }: WeatherCardProps) {
             <span className={"weather-location"}>{location}</span>
             <div className={"weather-container"}>
                 <span className={"weather-description"}>{weather[0].description}</span>
-                <img className={"weather-icon"} src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />
+                {weather[0].icon !== "" && <img className={"weather-icon"} src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`} />}
                 <div className={"weather-temps-temp"}>
                     {`Temp: ${temps.temp.toFixed(1)}°C`}
                 </div>
