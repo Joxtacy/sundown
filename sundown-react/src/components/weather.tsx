@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./weather.css";
 import Sunset from "./sunset";
+import WeatherCard, { Temperatures } from "./weather-card";
+import { Weather } from "./weather-card";
 
 export interface WeatherData {
     name?: string
@@ -8,21 +10,15 @@ export interface WeatherData {
         sunrise: number
         sunset: number
     }
-    main?: {
-        feels_like: number
-        humidity: number
-        pressure: number
-        temp: number
-        temp_max: number
-        temp_min: number
-    }
+    main: Temperatures;
+    weather: Weather[]
 }
 
 export interface WeatherProps {
     weatherData: WeatherData
 }
 
-function Weather({ weatherData }: WeatherProps) {
+function WeatherPanel({ weatherData }: WeatherProps) {
     const [currentTime, setCurrentTime] = useState(0);
     const [sunsetDate, setSunsetDate] = useState(new Date(weatherData.sys.sunset * 1000))
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -81,6 +77,7 @@ function Weather({ weatherData }: WeatherProps) {
 
     return (
         <section className={"weather"}>
+            <WeatherCard weather={weatherData.weather} temps={weatherData.main}/>
             <div className={"title"}>{weatherData.name}</div>
             <div className={"card time-sunset"}>Sunset is at {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString()}</div>
             {/* <div className={"card time-left"}>⌛️ {getTimeDifference(weatherData.sys.sunset * 1000, getCurrentTime()).toLocaleTimeString()}</div> */}
@@ -94,4 +91,4 @@ function Weather({ weatherData }: WeatherProps) {
     );
 }
 
-export default Weather;
+export default WeatherPanel;

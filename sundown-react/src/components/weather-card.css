@@ -1,0 +1,33 @@
+.weather-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1vmax;
+    font-size: 1.5vmax;
+    border-radius: 0 0 10% 0;
+}
+.weather-container {
+    display: flex;
+    align-items: flex-end;
+}
+
+.weather-description {
+    text-transform: capitalize;
+}
+
+.weather-icon {
+    height: 3vmax;
+    width: 3vmax;
+    margin-left: 1vmax;
+}
+
+.weather-temps {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

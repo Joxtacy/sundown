@@ -8,7 +8,23 @@ import ErrorBoundary from './components/error-boundary';
 function App() {
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
-    const [data, setData] = useState<WeatherData>({ main: undefined, sys: { sunrise: 0, sunset: 0 } });
+    const [data, setData] = useState<WeatherData>({ main: {
+        feels_like: 0,
+        humidity: 0,
+        pressure: 0,
+        temp: 0,
+        temp_min: 0,
+        temp_max: 0
+    },
+    sys: { sunrise: 0, sunset: 0 },
+    weather: [
+        {
+            description: "",
+            id: 0,
+            icon: "",
+            main: ""
+        }
+    ] });
     const [geoPermission, setGeoPermission] = useState("prompt");
 
     const getLocation = () => {
