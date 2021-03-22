@@ -36,6 +36,9 @@ function WeatherCard({ weather, temps, location }: WeatherCardProps) {
                 <div className={"weather-temps-feelslike"}>
                     {`Feels like: ${temps.feels_like.toFixed(1)}°C`}
                 </div>
+                <div className={"weather-temps-humidity"}>
+                    {`Humidity: ${temps.humidity}%`}
+                </div>
             </div>
             <div className={"weather-temps"}>
             </div>

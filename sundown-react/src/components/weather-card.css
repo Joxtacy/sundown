@@ -27,7 +27,8 @@
     grid-template-areas:
         "description icon"
         "temperature icon"
-        "feels-like icon";
+        "feels-like icon"
+        "humidity icon";
     /* display: flex;
     align-items: flex-end; */
 }
@@ -60,5 +61,10 @@
 
 .weather-temps-feelslike {
     grid-area: feels-like;
+    justify-self: start;
+}
+
+.weather-temps-humidity {
+    grid-area: humidity;
     justify-self: start;
 }
